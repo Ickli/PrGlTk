@@ -11,6 +11,7 @@ using OpenTK.Graphics.OpenGL;
 public class ObjModel {
     static Matrix4 identityMatrix = Matrix4.Identity;
     static ObjLoaderFactory oFactory = new ObjLoaderFactory();
+    public static bool setWrite = false;
 
     int VAO;
     int boxVAO;
@@ -49,7 +50,13 @@ public class ObjModel {
     }
 
     public void Draw() {
+        if(setWrite) {
+            Console.WriteLine(VAO);
+        }
         GLFuncs.DrawElements(VAO, elemLength);
+        if(setWrite) {
+            Console.WriteLine($"end {VAO}");
+        }
     }
 
     public void DrawBox() {

@@ -10,7 +10,7 @@ public static class GLFuncs {
     public static readonly int ElementPerFace = 3;
 
     public static int CreateAndPopulateBuffers(out int VBO, float[] coords, Vector3[]? normals = null, uint[]? elements = null) {
-        GL.GetInteger(GetPName.ArrayBufferBinding, out int oldVAO);
+//        GL.GetInteger(GetPName.ArrayBufferBinding, out int oldVAO);
 
         int VAO;
         if(normals != null) {
@@ -20,7 +20,7 @@ public static class GLFuncs {
             VAO = CreateAndPopulateBuffers_WithoutNormals(out VBO, coords, elements);
         }
 
-        GL.BindVertexArray(oldVAO);
+//        GL.BindVertexArray(oldVAO);
         return VAO;
     }
 

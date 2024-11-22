@@ -3,29 +3,28 @@ using System.Collections.Generic;
 using OpenTK.Mathematics;
 
 public class Model {
-    private List<ParameterLine> lines = new();
     private ObjModel obj;
 
     public ref Matrix matrix => ref obj.matrix;
 
     public static Model Pyramid() {
-        var raw = new ObjModel("cube.obj");
-        return new Model(raw, ParameterLine.ForPyramid());
+        var raw = new ObjModel("pyramid.obj");
+        return new Model(raw);
     }
 
     public static Model Sphere() {
         var raw = new ObjModel("sphere.obj");
-        return new Model(raw, ParameterLine.ForSphere());
+        return new Model(raw);
     }
 
     public static Model Cube() {
         var raw = new ObjModel("cube.obj");
-        return new Model(raw, ParameterLine.ForCube());
+        return new Model(raw);
     }
 
     public static Model Line() {
         var raw = new ObjModel("line.obj");
-        return new Model(raw, new List<ParameterLine>());
+        return new Model(raw);
     }
 
     public void Draw() {
@@ -36,6 +35,7 @@ public class Model {
         obj.DrawBox();
     }
 
+    /*
     public void DrawLines(Shader shader) {
         foreach(var line in lines) {
             shader.SetModelMatrix(
@@ -44,6 +44,7 @@ public class Model {
             line.Draw();
         }
     }
+    */
 
     public void Move(Vector3 vec) {
         obj.matrix.pos += vec;
@@ -63,17 +64,12 @@ public class Model {
         return obj.box.IntersectsLine(pos, dirNormalized, out anyOnSameSide);
     }
 
-    private Model(ObjModel model, List<ParameterLine> lines) {
+    private Model(ObjModel model) {
         this.obj = model;
-        this.lines = lines;
 
         Console.WriteLine("Final rect");
         for(int i = 0; i < obj.box.vertices.Length; i++) {
             Console.WriteLine(obj.box.vertices[i]);
-        }
-
-        foreach(var line in lines) {
-            line.Bind(this, this.obj);
         }
     }
 }
