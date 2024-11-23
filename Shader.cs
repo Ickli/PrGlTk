@@ -73,7 +73,7 @@ public class Shader {
 
     protected virtual void Dispose(bool disposing) {
         if (!disposedValue) {
-            GL.DeleteProgram(Handle);
+            GLFuncs.DeleteProgram(Handle);
 
             disposedValue = true;
         }
@@ -84,7 +84,6 @@ public class Shader {
             Console.WriteLine("GPU Resource leak! Did you forget to call Dispose()?");
         }
     }
-
 
     public void Dispose() {
         Dispose(true);

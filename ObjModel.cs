@@ -16,6 +16,8 @@ public class ObjModel {
 
     int VAO;
     int boxVAO;
+    int VBO;
+    int boxVBO;
 
     public Box box;
 
@@ -41,13 +43,13 @@ public class ObjModel {
         PopulateFrom(info, coords, normals, elements);
 
         Console.WriteLine("Model \"{0}\" ctor: creating GL buffers", filename);
-        VAO = GLFuncs.CreateAndPopulateBuffers(out int VBO, coords, normals, elements);
+        VAO = GLFuncs.CreateAndPopulateBuffers(out VBO, coords, normals, elements);
 
         matrix = new Matrix(new Vector3(0,0,0));
 
         Console.WriteLine("Model \"{0}\" ctor: compute OBB", filename);
         box = new Box(coords, normals, elements);
-        boxVAO = GLFuncs.CreateAndPopulateBuffers(out int boxVBO, box.GetCoords(), null, Box.GetElements());
+        boxVAO = GLFuncs.CreateAndPopulateBuffers(out boxVBO, box.GetCoords(), null, Box.GetElements());
     }
 
     public void Draw() {

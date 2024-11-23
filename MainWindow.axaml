@@ -5,5 +5,11 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="_5pr.MainWindow"
         Title="_5pr">
-    Welcome to Avalonia!
+    <DockPanel>
+    <Menu DockPanel.Dock="Top">
+        <MenuItem Header="_Open..."/>
+        <TextBox Text="{Binding Greeting}"/>
+    </Menu>
+    <TextBlock/>
+    </DockPanel>
 </Window>

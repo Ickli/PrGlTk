@@ -5,10 +5,11 @@
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <!--    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault> -->
   </PropertyGroup>
 
   <ItemGroup>
+      <!-- <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.1" /> -->
       <PackageReference Include="OpenTK" Version="4.8.2" />
       <PackageReference Include="OpenTK.Core" Version="4.8.2" />
       <PackageReference Include="OpenTK.Mathematics" Version="4.8.2" />
@@ -20,7 +21,7 @@
       <PackageReference Include="Avalonia.Desktop" Version="11.2.1" />
       <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1" />
       <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.1" />
-      <PackageReference Include="CjClutter.ObjLoader" Version="1.0.0"/>
+      <PackageReference Include="CjClutter.ObjLoader" Version="1.0.0" />
       <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
       <PackageReference Include="Avalonia.Diagnostics" Version="11.2.1">
           <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>

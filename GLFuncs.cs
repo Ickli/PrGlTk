@@ -39,6 +39,18 @@ public static class GLFuncs {
         GL.BufferSubData(target, offset, size, data);
     }
 
+    public static void DeleteBuffer(int VBO) {
+        GL.DeleteBuffer(VBO);
+    }
+
+    public static void DeleteVertexArray(int VAO) {
+        GL.DeleteVertexArray(VAO);
+    }
+
+    public static void DeleteProgram(int handle) {
+        GL.DeleteProgram(handle);
+    }
+
     private static int CreateAndPopulateBuffers_WithNormals(out int VBO, float[] coordNormals, uint[]? elements) {
         VBO = GL.GenBuffer();
         GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);

@@ -72,4 +72,7 @@ public class Model {
             Console.WriteLine(obj.box.vertices[i]);
         }
     }
+
+    ~Model() {
+    }
 }
