@@ -8,7 +8,7 @@ using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
-public class Shader {
+public class Shader: IDisposable {
     public int Handle;
 
     public int modelMatrixLocation;
@@ -20,6 +20,7 @@ public class Shader {
         var fSource = File.ReadAllText(fPath);
 
         var vShader = GL.CreateShader(ShaderType.VertexShader);
+
         GL.ShaderSource(vShader, vSource);
         GL.CompileShader(vShader);
         GL.GetShader(vShader, ShaderParameter.CompileStatus, out int success);
@@ -57,6 +58,8 @@ public class Shader {
         modelMatrixLocation = GL.GetUniformLocation(Handle, "model");
         viewMatrixLocation = GL.GetUniformLocation(Handle, "view");
         projectionMatrixLocation = GL.GetUniformLocation(Handle, "projection");
+
+        Console.WriteLine("Shader: constructed with handle = {0}", Handle);
     }
 
     public void Use(ref Matrix4 view, ref Matrix4 projection) {
@@ -73,6 +76,7 @@ public class Shader {
 
     protected virtual void Dispose(bool disposing) {
         if (!disposedValue) {
+            Console.WriteLine("Shader: disposing with handle = {0}", Handle);
             GLFuncs.DeleteProgram(Handle);
 
             disposedValue = true;
@@ -81,7 +85,7 @@ public class Shader {
 
     ~Shader() {
         if (disposedValue == false) {
-            Console.WriteLine("GPU Resource leak! Did you forget to call Dispose()?");
+            Console.WriteLine("Shader: GPU Resource leak! Did you forget to call Dispose()?");
         }
     }
 

@@ -1,0 +1,4 @@
+1. SaveDialog
+2. MainWindow.ShowSaveDialog()
+3. MsgDialog
+4. openGlControl.RenderToBitmap()

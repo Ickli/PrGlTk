@@ -2,17 +2,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:_5pr.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="_5pr.MainWindow"
         Title="_5pr">
 
+<!--
             <DockPanel>
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_Open..."/>
-                <TextBox Text="{Binding Greeting}"/>
-                <Button Click="ButtonClicked">Msg</Button>
+                <MenuItem Header="Edit">
+                    <MenuItem Header="_Open..."/>
+                    <TextBox Text="{Binding Greeting}"/>
+                </MenuItem>
             </Menu>
             <TextBlock/>
-        
+            </DockPanel>
+-->
+            <DockPanel>
+
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Edit">
+                    <MenuItem Header="_Open..."/>
+                    <TextBox Text="{Binding Greeting}"/>
+                    <Button Command="{Binding AddModel}" CommandParameter="sphere">add sphere</Button>
+                    <Button Command="{Binding AddModel}" CommandParameter="pyramid">add pyramid</Button>
+                    <Button Command="{Binding AddModel}" CommandParameter="cube">add cube</Button>
+                </MenuItem>
+
+                <Button Click="OnSaveButtonClick">Save</Button>
+            </Menu>
+            
+            <StackPanel x:Name="modelPanels">
+            </StackPanel>
+            <controls:MainOpenGlControl Focusable="true" DockPanel.Dock="Right" x:Name="openGlControl"></controls:MainOpenGlControl>
+
             </DockPanel>
 </Window>

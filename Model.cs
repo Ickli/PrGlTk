@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using OpenTK.Mathematics;
 
-public class Model {
+public class Model: IDisposable {
     private ObjModel obj;
 
     public ref Matrix matrix => ref obj.matrix;
@@ -74,5 +74,14 @@ public class Model {
     }
 
     ~Model() {
+    }
+
+    protected virtual void Dispose(bool disposing) {
+        obj.Dispose();
+    }
+
+    public void Dispose() {
+        Dispose(true);
+
     }
 }

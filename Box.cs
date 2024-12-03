@@ -343,9 +343,7 @@ public class Box {
                 }
             }
 
-            if(allOnSameSide) {
-                allOnSameSide = anyOnSameSidePerPlane;
-            }
+            allOnSameSide = allOnSameSide && anyOnSameSidePerPlane;
 
             // comparing to 0 because frac is computed relative to 'pos' for every projection
             if(minFrac > 0 || maxFrac < 0) {

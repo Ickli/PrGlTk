@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Collections.Generic;
 using ObjLoader.Loader.Loaders;
 using ObjLoader.Loader.Data.VertexData;
@@ -51,6 +52,26 @@ public static class GLFuncs {
         GL.DeleteProgram(handle);
     }
 
+    private static unsafe void WriteWhite(byte* ptr, int size) {
+        for(int i = 0; i < size; i++) {
+            ptr[i] = 0xFF;
+        }
+    }
+
+    public static void ReadPixels(Rectangle rect, IntPtr dest) {
+        GL.Finish();
+        GL.Flush();
+        GL.ReadBuffer(ReadBufferMode.Front);
+        unsafe {
+            WriteWhite((byte*)dest.ToPointer(), rect.Width*rect.Height*4);
+        }
+        _5pr.Controls.MainOpenGlControl.modelsMutex.WaitOne();
+        GL.ReadPixels(rect.X, rect.Y, rect.Width, rect.Height, PixelFormat.Rgba, PixelType.UnsignedByte, dest);
+        GL.Finish();
+        _5pr.Controls.MainOpenGlControl.modelsMutex.ReleaseMutex();
+        Console.WriteLine($"!!! {GL.GetError()}");
+    }
+
     private static int CreateAndPopulateBuffers_WithNormals(out int VBO, float[] coordNormals, uint[]? elements) {
         VBO = GL.GenBuffer();
         GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
@@ -81,6 +102,7 @@ public static class GLFuncs {
         GL.BufferData(BufferTarget.ArrayBuffer, coords.Length * sizeof(float), coords, BufferUsageHint.DynamicDraw);
 
         int VAO = GL.GenVertexArray();
+        Console.WriteLine($"CreateAndPopulateBuffers_WithoutNormals VAO = {VAO}");
         GL.BindVertexArray(VAO);
 
         GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, sizeof(float)*3, 0);

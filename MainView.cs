@@ -6,8 +6,7 @@ using System.IO;
 
 namespace _5pr.Views;
 
-public partial class MainView : UserControl
-{
+public partial class MainView : UserControl {
     public MainView() {
     }
 }

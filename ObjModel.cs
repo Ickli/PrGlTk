@@ -9,15 +9,15 @@ using OpenTK.Graphics.OpenGL;
 // TODO:
 // Use one layout format for many VBOS
 // Or store every object in one VBO and call MultiDraw
-public class ObjModel {
+public class ObjModel: IDisposable {
     static Matrix4 identityMatrix = Matrix4.Identity;
     static ObjLoaderFactory oFactory = new ObjLoaderFactory();
-    public static bool setWrite = false;
 
     int VAO;
     int boxVAO;
     int VBO;
     int boxVBO;
+    bool disposedValue = false;
 
     public Box box;
 
@@ -53,13 +53,7 @@ public class ObjModel {
     }
 
     public void Draw() {
-        if(setWrite) {
-            Console.WriteLine(VAO);
-        }
         GLFuncs.DrawElements(VAO, elemLength);
-        if(setWrite) {
-            Console.WriteLine($"end {VAO}");
-        }
     }
 
     public void DrawBox() {
@@ -88,4 +82,25 @@ public class ObjModel {
     }
 
     private Vector3 ObjNormalToVector3(in Normal n) => new Vector3(n.X, n.Y, n.Z);
+
+    protected virtual void Dispose(bool disposing) {
+        if(!disposedValue) {
+            GLFuncs.DeleteVertexArray(VAO);
+            GLFuncs.DeleteVertexArray(boxVAO);
+            GLFuncs.DeleteBuffer(VBO);
+            GLFuncs.DeleteBuffer(boxVBO);
+            disposedValue = true;
+        }
+    }
+
+    public void Dispose() {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    ~ObjModel() {
+        if (disposedValue == false) {
+            Console.WriteLine("ObjModel: GPU Resource leak! Did you forget to call Dispose()?");
+        }
+    }
 }
