@@ -4,7 +4,6 @@ namespace _5pr;
 
 public class MainWindowViewModel {
     private MainWindow window;
-    public string Greeting => "HELLO!!!";
 
     public MainWindowViewModel(MainWindow window) {
         this.window = window;

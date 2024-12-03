@@ -7,23 +7,9 @@
         x:Class="_5pr.MainWindow"
         Title="_5pr">
 
-<!--
             <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Edit">
-                    <MenuItem Header="_Open..."/>
-                    <TextBox Text="{Binding Greeting}"/>
-                </MenuItem>
-            </Menu>
-            <TextBlock/>
-            </DockPanel>
--->
-            <DockPanel>
-
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="Edit">
-                    <MenuItem Header="_Open..."/>
-                    <TextBox Text="{Binding Greeting}"/>
                     <Button Command="{Binding AddModel}" CommandParameter="sphere">add sphere</Button>
                     <Button Command="{Binding AddModel}" CommandParameter="pyramid">add pyramid</Button>
                     <Button Command="{Binding AddModel}" CommandParameter="cube">add cube</Button>
